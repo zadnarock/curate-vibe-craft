@@ -1,12 +1,38 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useEffect } from 'react';
+import { Navbar } from '@/components/Navbar';
+import { Hero } from '@/components/Hero';
+import { PainSection } from '@/components/PainSection';
+import { PromiseSection } from '@/components/PromiseSection';
+import { HowItWorks } from '@/components/HowItWorks';
+import { WaitlistForm } from '@/components/WaitlistForm';
+import { WhyChooseUs } from '@/components/WhyChooseUs';
+import { SignatureRail } from '@/components/SignatureRail';
+import { TrustRow } from '@/components/TrustRow';
+import { Footer } from '@/components/Footer';
 
 const Index = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className={`min-h-screen transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+      <Navbar />
+      
+      <main>
+        <Hero />
+        <PainSection />
+        <PromiseSection />
+        <HowItWorks />
+        <WaitlistForm />
+        <WhyChooseUs />
+        <SignatureRail />
+        <TrustRow />
+      </main>
+      
+      <Footer />
     </div>
   );
 };

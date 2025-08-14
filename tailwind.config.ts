@@ -18,7 +18,19 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				display: ['Playfair Display', 'serif'],
+				body: ['Inter', 'system-ui', 'sans-serif'],
+			},
 			colors: {
+				// Base palette
+				charcoal: 'hsl(var(--charcoal))',
+				ivory: 'hsl(var(--ivory))',
+				champagne: 'hsl(var(--champagne))',
+				emerald: 'hsl(var(--emerald))',
+				blush: 'hsl(var(--blush))',
+				
+				// System colors
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
@@ -67,6 +79,15 @@ export default {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
+			},
+			boxShadow: {
+				soft: 'var(--shadow-soft)',
+				elegant: 'var(--shadow-elegant)',
+				glow: 'var(--shadow-glow)',
+			},
+			spacing: {
+				'18': '4.5rem',
+				'88': '22rem',
 			},
 			keyframes: {
 				'accordion-down': {

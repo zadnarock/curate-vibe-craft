@@ -2,95 +2,97 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Curate Design System - Premium waitlist page tokens */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Base palette */
+    --charcoal: 0 0% 5.5%;
+    --ivory: 45 33% 96.5%;
+    
+    /* Accents */
+    --champagne: 38 35% 67%;
+    --emerald: 171 60% 16%;
+    --blush: 23 29% 92%;
+    
+    /* System colors using base palette */
+    --background: var(--ivory);
+    --foreground: var(--charcoal);
+    
+    --card: var(--ivory);
+    --card-foreground: var(--charcoal);
+    
+    --popover: var(--ivory);
+    --popover-foreground: var(--charcoal);
+    
+    --primary: var(--charcoal);
+    --primary-foreground: var(--ivory);
+    
+    --secondary: var(--blush);
+    --secondary-foreground: var(--charcoal);
+    
+    --muted: var(--blush);
+    --muted-foreground: 0 0% 45%;
+    
+    --accent: var(--champagne);
+    --accent-foreground: var(--charcoal);
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: var(--ivory);
+    
+    --border: var(--champagne);
+    --input: var(--blush);
+    --ring: var(--champagne);
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--background)), hsl(var(--blush)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(var(--blush)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--champagne)), hsl(var(--emerald)));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -8px hsl(var(--charcoal) / 0.15);
+    --shadow-elegant: 0 10px 40px -12px hsl(var(--charcoal) / 0.25);
+    --shadow-glow: 0 0 30px hsl(var(--champagne) / 0.3);
+    
+    /* Radius */
+    --radius: 28px;
+    
+    /* Film grain texture */
+    --film-grain: radial-gradient(circle at 20% 50%, transparent 20%, hsl(var(--charcoal) / 0.08) 21%, hsl(var(--charcoal) / 0.08) 34%, transparent 35%, transparent),
+                  linear-gradient(0deg, transparent 24%, hsl(var(--charcoal) / 0.05) 25%, hsl(var(--charcoal) / 0.05) 26%, transparent 27%, transparent 74%, hsl(var(--charcoal) / 0.05) 75%, hsl(var(--charcoal) / 0.05) 76%, transparent 77%, transparent);
+    
+    /* Transitions */
+    --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+    --duration-fast: 200ms;
+    --duration-medium: 350ms;
+    --duration-slow: 450ms;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: var(--charcoal);
+    --foreground: var(--ivory);
+    
+    --card: var(--charcoal);
+    --card-foreground: var(--ivory);
+    
+    --popover: var(--charcoal);
+    --popover-foreground: var(--ivory);
+    
+    --primary: var(--ivory);
+    --primary-foreground: var(--charcoal);
+    
+    --secondary: var(--emerald);
+    --secondary-foreground: var(--ivory);
+    
+    --muted: var(--emerald);
+    --muted-foreground: 0 0% 65%;
+    
+    --accent: var(--champagne);
+    --accent-foreground: var(--charcoal);
+    
+    --border: var(--emerald);
+    --input: var(--emerald);
+    --ring: var(--champagne);
   }
 }
 
@@ -100,6 +102,137 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body antialiased;
+    background-image: var(--film-grain);
+  }
+  
+  /* Typography scale */
+  .text-hero {
+    @apply font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight;
+  }
+  
+  .text-headline {
+    @apply font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight;
+  }
+  
+  .text-subhead {
+    @apply font-body text-lg md:text-xl leading-relaxed font-light;
+  }
+  
+  .text-body {
+    @apply font-body text-base leading-relaxed;
+  }
+  
+  /* Motion utilities */
+  .animate-fade-up {
+    animation: fadeUp var(--duration-medium) var(--ease-premium) forwards;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn var(--duration-medium) var(--ease-premium) forwards;
+  }
+  
+  .animate-breathe {
+    animation: breathe 2.5s var(--ease-premium) infinite alternate;
+  }
+  
+  /* Glass morphism */
+  .glass {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  /* Light catch edge */
+  .light-catch {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .light-catch::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(var(--champagne) / 0.4), transparent);
+    transition: left var(--duration-medium) var(--ease-premium);
+  }
+  
+  .light-catch:hover::before {
+    left: 100%;
+  }
+}
+
+@layer components {
+  /* Button variants */
+  .btn-hero {
+    @apply bg-primary text-primary-foreground px-8 py-4 rounded-full font-medium;
+    @apply hover:shadow-glow transition-all duration-300;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .btn-ghost {
+    @apply text-foreground px-6 py-3 rounded-full font-medium border border-border;
+    @apply hover:bg-accent/10 transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+  }
+  
+  /* Card styles */
+  .card-glass {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50 rounded-3xl p-6;
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .card-elevated {
+    @apply bg-card border border-border/30 rounded-3xl p-8;
+    box-shadow: var(--shadow-elegant);
+  }
+}
+
+/* Keyframes */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes breathe {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.02);
+  }
+}
+
+/* Reduce motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-breathe,
+  .animate-fade-up,
+  .animate-fade-in {
+    animation: none;
+  }
+  
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
