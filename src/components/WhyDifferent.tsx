@@ -145,23 +145,66 @@ export function WhyDifferent() {
         </div>
         
         <div id="tile-stage" className="absolute inset-0 pointer-events-none">
-          {/* Positioned tiles around the content */}
-          <div className="tile note t1 absolute opacity-0 translate-y-10 scale-95" style={{ left: '6%', top: '18%' }}></div>
-          <div className="tile mint t2 absolute opacity-0 translate-y-10 scale-95" style={{ right: '10%', top: '22%' }}></div>
-          <div className="tile aqua t3 absolute opacity-0 translate-y-10 scale-95" style={{ left: '12%', top: '45%' }}></div>
-          <div className="tile gold t4 absolute opacity-0 translate-y-10 scale-95" style={{ right: '8%', top: '48%' }}></div>
-          <div className="tile note t5 absolute opacity-0 translate-y-10 scale-95" style={{ left: '8%', top: '72%' }}></div>
-          <div className="tile mint t6 absolute opacity-0 translate-y-10 scale-95" style={{ right: '12%', top: '75%' }}></div>
-          <div className="tile aqua t7 absolute opacity-0 translate-y-10 scale-95" style={{ left: '18%', top: '28%' }}></div>
-          <div className="tile gold t8 absolute opacity-0 translate-y-10 scale-95" style={{ right: '16%', top: '32%' }}></div>
-          <div className="tile ink t9 absolute opacity-0 translate-y-10 scale-95 flex items-center justify-center font-semibold text-sm" style={{ left: '15%', top: '60%' }}>
-            Story
+          {/* Testimonial tiles positioned organically like Miro */}
+          <div className="tile note t1 absolute opacity-0 translate-y-10 scale-95 p-4 text-sm leading-relaxed" style={{ left: '8%', top: '15%', width: '200px', height: 'auto' }}>
+            "AmazeMe turned our anniversary into something magical. Every detail felt personal."
+            <div className="text-xs mt-2 opacity-70">- Sarah</div>
           </div>
-          <div className="tile ink t10 absolute opacity-0 translate-y-10 scale-95 flex items-center justify-center font-semibold text-sm" style={{ right: '18%', top: '58%' }}>
-            Wow
+          
+          <div className="tile mint t2 absolute opacity-0 translate-y-10 scale-95 p-4 text-sm leading-relaxed" style={{ right: '12%', top: '20%', width: '180px', height: 'auto' }}>
+            "No templates, just pure creativity tailored to our story."
+            <div className="text-xs mt-2 opacity-70">- Marcus</div>
           </div>
-          <div className="tile note t11 absolute opacity-0 translate-y-10 scale-95" style={{ left: '25%', top: '15%' }}></div>
-          <div className="tile mint t12 absolute opacity-0 translate-y-10 scale-95" style={{ right: '22%', top: '12%' }}></div>
+          
+          <div className="tile aqua t3 absolute opacity-0 translate-y-10 scale-95 p-4 text-sm leading-relaxed" style={{ left: '5%', top: '45%', width: '190px', height: 'auto' }}>
+            "They captured our vibe perfectly - romantic but not cheesy."
+            <div className="text-xs mt-2 opacity-70">- Elena</div>
+          </div>
+          
+          <div className="tile gold t4 absolute opacity-0 translate-y-10 scale-95 p-4 text-sm leading-relaxed" style={{ right: '8%', top: '50%', width: '170px', height: 'auto' }}>
+            "From setup to cleanup, flawless execution."
+            <div className="text-xs mt-2 opacity-70">- James</div>
+          </div>
+          
+          <div className="tile note t5 absolute opacity-0 translate-y-10 scale-95 p-4 text-sm leading-relaxed" style={{ left: '15%', top: '75%', width: '185px', height: 'auto' }}>
+            "Worth every penny. Our guests are still talking about it."
+            <div className="text-xs mt-2 opacity-70">- Priya</div>
+          </div>
+          
+          <div className="tile mint t6 absolute opacity-0 translate-y-10 scale-95 p-4 text-sm leading-relaxed" style={{ right: '15%', top: '75%', width: '175px', height: 'auto' }}>
+            "Finally, someone who gets our aesthetic."
+            <div className="text-xs mt-2 opacity-70">- David</div>
+          </div>
+          
+          <div className="tile aqua t7 absolute opacity-0 translate-y-10 scale-95 p-4 text-sm leading-relaxed" style={{ left: '25%', top: '25%', width: '165px', height: 'auto' }}>
+            "Stress-free planning with stunning results."
+            <div className="text-xs mt-2 opacity-70">- Lisa</div>
+          </div>
+          
+          <div className="tile gold t8 absolute opacity-0 translate-y-10 scale-95 p-4 text-sm leading-relaxed" style={{ right: '25%', top: '35%', width: '160px', height: 'auto' }}>
+            "They made our vision come alive beautifully."
+            <div className="text-xs mt-2 opacity-70">- Raj</div>
+          </div>
+          
+          <div className="tile ink t9 absolute opacity-0 translate-y-10 scale-95 p-4 text-sm leading-relaxed text-white" style={{ left: '3%', top: '65%', width: '155px', height: 'auto' }}>
+            "Pure magic in every detail."
+            <div className="text-xs mt-2 opacity-70">- Amy</div>
+          </div>
+          
+          <div className="tile ink t10 absolute opacity-0 translate-y-10 scale-95 p-4 text-sm leading-relaxed text-white" style={{ right: '3%', top: '65%', width: '170px', height: 'auto' }}>
+            "Exceeded our wildest expectations."
+            <div className="text-xs mt-2 opacity-70">- Chris</div>
+          </div>
+          
+          <div className="tile note t11 absolute opacity-0 translate-y-10 scale-95 p-4 text-sm leading-relaxed" style={{ left: '35%', top: '12%', width: '150px', height: 'auto' }}>
+            "Effortlessly elegant."
+            <div className="text-xs mt-2 opacity-70">- Zara</div>
+          </div>
+          
+          <div className="tile mint t12 absolute opacity-0 translate-y-10 scale-95 p-4 text-sm leading-relaxed" style={{ right: '35%', top: '8%', width: '145px', height: 'auto' }}>
+            "Our love story, beautifully told."
+            <div className="text-xs mt-2 opacity-70">- Kevin</div>
+          </div>
         </div>
       </div>
     </section>
