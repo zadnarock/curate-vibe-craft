@@ -221,18 +221,58 @@
   }
 }
 
-/* Reduce motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .animate-breathe,
-  .animate-fade-up,
-  .animate-fade-in {
-    animation: none;
+  /* Why Different Section Styles */
+  .tile {
+    width: clamp(110px, 12vw, 180px);
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+    will-change: transform, opacity;
   }
   
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  .tile.note {
+    background: #F6E7C1;
   }
-}
+  
+  .tile.mint {
+    background: #DAF5DC;
+  }
+  
+  .tile.aqua {
+    background: #CDEDF6;
+  }
+  
+  .tile.gold {
+    background: #E7C873;
+  }
+  
+  .tile.ink {
+    background: #101316;
+    color: #FCFCF9;
+  }
+
+  /* Reduce motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-breathe,
+    .animate-fade-up,
+    .animate-fade-in {
+      animation: none;
+    }
+    
+    .tile {
+      transform: none !important;
+    }
+    
+    .copy h2, 
+    .copy .sub, 
+    .copy .cta {
+      transform: none !important;
+    }
+    
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }

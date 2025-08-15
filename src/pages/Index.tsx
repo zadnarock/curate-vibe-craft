@@ -5,7 +5,7 @@ import { PainSection } from '@/components/PainSection';
 import { PromiseSection } from '@/components/PromiseSection';
 import { HowItWorks } from '@/components/HowItWorks';
 import { WaitlistForm } from '@/components/WaitlistForm';
-import { WhyChooseUs } from '@/components/WhyChooseUs';
+import { WhyDifferent } from '@/components/WhyDifferent';
 import { SignatureRail } from '@/components/SignatureRail';
 import { TrustRow } from '@/components/TrustRow';
 import { Footer } from '@/components/Footer';
@@ -27,7 +27,7 @@ const Index = () => {
         <PromiseSection />
         <HowItWorks />
         <WaitlistForm />
-        <WhyChooseUs />
+        <WhyDifferent />
         <SignatureRail />
         <TrustRow />
       </main>
