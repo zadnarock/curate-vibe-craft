@@ -111,28 +111,28 @@ export function WhyDifferent() {
     <section 
       ref={sectionRef} 
       id="why-different" 
-      className={styles.why}
+      className={`${styles.why} why`}
     >
-      <div className={styles.inner}>
-        <div className={styles.copy}>
+      <div className={`${styles.inner} inner`}>
+        <div className={`${styles.copy} copy`}>
           <h2>Why AmazeMe feels different</h2>
-          <p className={styles.sub}>Not templates. Living memories, written for your story.</p>
-          <a className={styles.cta} href="#waitlist">Join the waitlist</a>
+          <p className={`${styles.sub} sub`}>Not templates. Living memories, written for your story.</p>
+          <a className={`${styles.cta} cta`} href="#waitlist">Join the waitlist</a>
         </div>
         
         <div id="tile-stage" aria-hidden="true">
-          <div className={`${styles.tile} ${styles.note} ${styles.t1}`} data-depth="0.30"></div>
-          <div className={`${styles.tile} ${styles.aqua} ${styles.t2}`} data-depth="0.42"></div>
-          <div className={`${styles.tile} ${styles.mint} ${styles.t3}`} data-depth="0.54"></div>
-          <div className={`${styles.tile} ${styles.gold} ${styles.t4}`} data-depth="0.66"></div>
-          <div className={`${styles.tile} ${styles.note} ${styles.t5}`} data-depth="0.78"></div>
-          <div className={`${styles.tile} ${styles.aqua} ${styles.t6}`} data-depth="0.90"></div>
-          <div className={`${styles.tile} ${styles.mint} ${styles.t7}`} data-depth="0.36"></div>
-          <div className={`${styles.tile} ${styles.gold} ${styles.t8}`} data-depth="0.48"></div>
-          <div className={`${styles.tile} ${styles.ink} ${styles.t9}`} data-depth="0.60">Story</div>
-          <div className={`${styles.tile} ${styles.note} ${styles.t10}`} data-depth="0.72"></div>
-          <div className={`${styles.tile} ${styles.aqua} ${styles.t11}`} data-depth="0.84"></div>
-          <div className={`${styles.tile} ${styles.ink} ${styles.t12}`} data-depth="0.96">Wow</div>
+          <div className={`${styles.tile} tile ${styles.note} note ${styles.t1} t1`} data-depth="0.30"></div>
+          <div className={`${styles.tile} tile ${styles.aqua} aqua ${styles.t2} t2`} data-depth="0.42"></div>
+          <div className={`${styles.tile} tile ${styles.mint} mint ${styles.t3} t3`} data-depth="0.54"></div>
+          <div className={`${styles.tile} tile ${styles.gold} gold ${styles.t4} t4`} data-depth="0.66"></div>
+          <div className={`${styles.tile} tile ${styles.note} note ${styles.t5} t5`} data-depth="0.78"></div>
+          <div className={`${styles.tile} tile ${styles.aqua} aqua ${styles.t6} t6`} data-depth="0.90"></div>
+          <div className={`${styles.tile} tile ${styles.mint} mint ${styles.t7} t7`} data-depth="0.36"></div>
+          <div className={`${styles.tile} tile ${styles.gold} gold ${styles.t8} t8`} data-depth="0.48"></div>
+          <div className={`${styles.tile} tile ${styles.ink} ink ${styles.t9} t9`} data-depth="0.60">Story</div>
+          <div className={`${styles.tile} tile ${styles.note} note ${styles.t10} t10`} data-depth="0.72"></div>
+          <div className={`${styles.tile} tile ${styles.aqua} aqua ${styles.t11} t11`} data-depth="0.84"></div>
+          <div className={`${styles.tile} tile ${styles.ink} ink ${styles.t12} t12`} data-depth="0.96">Wow</div>
         </div>
       </div>
     </section>
