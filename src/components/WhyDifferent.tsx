@@ -1,138 +1,167 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import styles from './why-different.module.css';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export function WhyDifferent() {
   const sectionRef = useRef<HTMLElement>(null);
-  const observerRef = useRef<IntersectionObserver | null>(null);
-  const scrollHandlerRef = useRef<(() => void) | null>(null);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const idleTimelinesRef = useRef<gsap.core.Timeline[]>([]);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const section = sectionRef.current;
     if (!section) return;
 
-    const tiles = Array.from(section.querySelectorAll('.tile'));
-    const copyElements = Array.from(section.querySelectorAll('.copy h2, .copy .sub, .copy .cta'));
-    
+    const tiles = Array.from(section.querySelectorAll('#tile-stage .tile'));
+    const h2 = section.querySelector('.copy h2');
+    const sub = section.querySelector('.copy .sub');
+    const cta = section.querySelector('.copy .cta');
+    const copyEls = [h2, sub, cta].filter(Boolean);
+
+    // Randomize initial rotation for tiles
+    tiles.forEach((tile) => {
+      const rotation = (Math.random() - 0.5) * 6; // -3 to +3 degrees
+      gsap.set(tile, { rotation });
+    });
+
     // Check for reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Give each tile random initial rotation
-    tiles.forEach((tile) => {
-      const rotation = (Math.random() - 0.5) * 6; // -3 to +3 degrees
-      (tile as HTMLElement).style.setProperty('--r0', `${rotation}deg`);
-    });
-
-    // Set up random idle animation variables for each tile
-    tiles.forEach((tile) => {
-      const dx = (Math.random() - 0.5) * 16; // ±8px
-      const dy = (Math.random() - 0.5) * 20; // ±10px
-      const rot = (Math.random() - 0.5) * 4; // ±2deg
-      const dur = 3 + Math.random() * 3; // 3-6s
+    const startIdle = () => {
+      if (prefersReducedMotion) return;
       
-      const el = tile as HTMLElement;
-      el.style.setProperty('--dx', `${dx}px`);
-      el.style.setProperty('--dy', `${dy}px`);
-      el.style.setProperty('--rot', `${rot}deg`);
-      el.style.setProperty('--dur', `${dur}s`);
-    });
-
-    // Stagger copy elements
-    copyElements.forEach((el, index) => {
-      (el as HTMLElement).style.transitionDelay = `${index * 0.08}s`;
-    });
-
-    // Stagger tiles
-    tiles.forEach((tile, index) => {
-      (tile as HTMLElement).style.transitionDelay = `${index * 0.05}s`;
-    });
-
-    // Parallax scroll handler
-    const handleScroll = () => {
-      if (!section.classList.contains(styles.active)) return;
-      
-      const rect = section.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      
-      // Calculate progress (0 to 1) based on section visibility
-      const progress = Math.max(0, Math.min(1, 
-        1 - (rect.top / (viewportHeight - rect.height))
-      ));
-      
-      tiles.forEach((tile) => {
-        const depth = parseFloat((tile as HTMLElement).dataset.depth || '0.5');
-        const parallaxY = (progress - 0.5) * depth * 24;
+      tiles.forEach((tile, i) => {
+        const tl = gsap.timeline({ repeat: -1, yoyo: true });
+        const xOffset = (Math.random() - 0.5) * 16; // ±8px
+        const yOffset = (Math.random() - 0.5) * 20; // ±10px
+        const rotateOffset = (Math.random() - 0.5) * 4; // ±2°
+        const duration = 3 + Math.random() * 3; // 3-6s
+        const delay = Math.random() * 2; // random phase
         
-        (tile as HTMLElement).style.setProperty('--parallax-y', `${parallaxY}px`);
+        tl.to(tile, {
+          x: xOffset,
+          y: yOffset,
+          rotation: rotateOffset,
+          duration,
+          ease: 'sine.inOut',
+          delay
+        });
+        
+        idleTimelinesRef.current.push(tl);
       });
     };
 
-    // Intersection Observer
-    observerRef.current = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          section.classList.add(styles.active);
-          
-          if (!prefersReducedMotion) {
-            // Start idle animation after intro
-            setTimeout(() => {
-              section.classList.add(styles.idle);
-            }, 200);
-            
-            // Add scroll listener for parallax
-            scrollHandlerRef.current = handleScroll;
-            window.addEventListener('scroll', handleScroll, { passive: true });
-          }
-        } else {
-          section.classList.remove(styles.idle);
-          
-          // Remove scroll listener
-          if (scrollHandlerRef.current) {
-            window.removeEventListener('scroll', scrollHandlerRef.current);
-            scrollHandlerRef.current = null;
-          }
-        }
-      },
-      { threshold: 0.2 }
-    );
+    const stopIdle = () => {
+      idleTimelinesRef.current.forEach(tl => tl.kill());
+      idleTimelinesRef.current = [];
+    };
 
-    observerRef.current.observe(section);
+    // Main intro timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 70%',
+        end: 'bottom top',
+        toggleActions: 'play none none reverse',
+        onEnter: startIdle,
+        onLeave: stopIdle,
+        onEnterBack: startIdle,
+        onLeaveBack: stopIdle
+      }
+    });
+
+    // Animate copy in
+    tl.to(copyEls, {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: 'expo.out',
+      stagger: 0.08
+    });
+
+    // Animate tiles in
+    tl.to(tiles, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.9,
+      ease: 'expo.out',
+      stagger: 0.05
+    }, '-=0.4');
+
+    timelineRef.current = tl;
+
+    // Subtle parallax
+    if (!prefersReducedMotion) {
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top bottom',
+        end: 'bottom top',
+        onUpdate: (self) => {
+          const p = self.progress - 0.5;
+          tiles.forEach((el, i) => {
+            const depth = 0.3 + (i % 6) * 0.12;
+            gsap.to(el, {
+              y: p * depth * 24,
+              duration: 0.2,
+              ease: 'sine.out',
+              overwrite: 'auto'
+            });
+          });
+        }
+      });
+    }
 
     return () => {
-      observerRef.current?.disconnect();
-      if (scrollHandlerRef.current) {
-        window.removeEventListener('scroll', scrollHandlerRef.current);
-      }
+      timelineRef.current?.kill();
+      stopIdle();
+      ScrollTrigger.getAll().forEach(st => st.kill());
     };
   }, []);
 
   return (
-    <section 
-      ref={sectionRef} 
-      id="why-different" 
-      className={`${styles.why} why`}
-    >
-      <div className={`${styles.inner} inner`}>
-        <div className={`${styles.copy} copy`}>
-          <h2>Why AmazeMe feels different</h2>
-          <p className={`${styles.sub} sub`}>Not templates. Living memories, written for your story.</p>
-          <a className={`${styles.cta} cta`} href="#waitlist">Join the waitlist</a>
+    <section ref={sectionRef} className="why relative overflow-hidden grid place-items-center" style={{ minHeight: 'min(100vh, 880px)' }}>
+      <div className="inner relative w-full max-w-6xl mx-auto px-6">
+        <div className="copy relative z-10 text-center max-w-4xl mx-auto">
+          <h2 className="text-headline mb-6 text-charcoal opacity-0 translate-y-3">
+            Why AmazeMe feels different
+          </h2>
+          <p className="sub text-subhead text-charcoal/70 mb-8 opacity-0 translate-y-3">
+            Not templates. Living memories, written for your story.
+          </p>
+          <a 
+            href="#waitlist" 
+            className="cta btn-hero inline-block opacity-0 translate-y-3 hover:scale-105 transition-transform duration-200"
+          >
+            Join the waitlist
+          </a>
         </div>
         
-        <div id="tile-stage" aria-hidden="true">
-          <div className={`${styles.tile} tile ${styles.note} note ${styles.t1} t1`} data-depth="0.30"></div>
-          <div className={`${styles.tile} tile ${styles.aqua} aqua ${styles.t2} t2`} data-depth="0.42"></div>
-          <div className={`${styles.tile} tile ${styles.mint} mint ${styles.t3} t3`} data-depth="0.54"></div>
-          <div className={`${styles.tile} tile ${styles.gold} gold ${styles.t4} t4`} data-depth="0.66"></div>
-          <div className={`${styles.tile} tile ${styles.note} note ${styles.t5} t5`} data-depth="0.78"></div>
-          <div className={`${styles.tile} tile ${styles.aqua} aqua ${styles.t6} t6`} data-depth="0.90"></div>
-          <div className={`${styles.tile} tile ${styles.mint} mint ${styles.t7} t7`} data-depth="0.36"></div>
-          <div className={`${styles.tile} tile ${styles.gold} gold ${styles.t8} t8`} data-depth="0.48"></div>
-          <div className={`${styles.tile} tile ${styles.ink} ink ${styles.t9} t9`} data-depth="0.60">Story</div>
-          <div className={`${styles.tile} tile ${styles.note} note ${styles.t10} t10`} data-depth="0.72"></div>
-          <div className={`${styles.tile} tile ${styles.aqua} aqua ${styles.t11} t11`} data-depth="0.84"></div>
-          <div className={`${styles.tile} tile ${styles.ink} ink ${styles.t12} t12`} data-depth="0.96">Wow</div>
+        <div id="tile-stage" className="absolute inset-0 pointer-events-none">
+          {/* Positioned tiles around the content */}
+          <div className="tile note t1 absolute opacity-0 translate-y-10 scale-95" style={{ left: '6%', top: '18%' }}></div>
+          <div className="tile mint t2 absolute opacity-0 translate-y-10 scale-95" style={{ right: '10%', top: '22%' }}></div>
+          <div className="tile aqua t3 absolute opacity-0 translate-y-10 scale-95" style={{ left: '12%', top: '45%' }}></div>
+          <div className="tile gold t4 absolute opacity-0 translate-y-10 scale-95" style={{ right: '8%', top: '48%' }}></div>
+          <div className="tile note t5 absolute opacity-0 translate-y-10 scale-95" style={{ left: '8%', top: '72%' }}></div>
+          <div className="tile mint t6 absolute opacity-0 translate-y-10 scale-95" style={{ right: '12%', top: '75%' }}></div>
+          <div className="tile aqua t7 absolute opacity-0 translate-y-10 scale-95" style={{ left: '18%', top: '28%' }}></div>
+          <div className="tile gold t8 absolute opacity-0 translate-y-10 scale-95" style={{ right: '16%', top: '32%' }}></div>
+          <div className="tile ink t9 absolute opacity-0 translate-y-10 scale-95 flex items-center justify-center font-semibold text-sm" style={{ left: '15%', top: '60%' }}>
+            Story
+          </div>
+          <div className="tile ink t10 absolute opacity-0 translate-y-10 scale-95 flex items-center justify-center font-semibold text-sm" style={{ right: '18%', top: '58%' }}>
+            Wow
+          </div>
+          <div className="tile note t11 absolute opacity-0 translate-y-10 scale-95" style={{ left: '25%', top: '15%' }}></div>
+          <div className="tile mint t12 absolute opacity-0 translate-y-10 scale-95" style={{ right: '22%', top: '12%' }}></div>
         </div>
       </div>
     </section>

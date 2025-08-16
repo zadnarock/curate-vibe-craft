@@ -223,38 +223,27 @@
 
   /* Why Different Section Styles */
   .tile {
-    border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+    width: clamp(110px, 12vw, 180px);
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
     will-change: transform, opacity;
-    backdrop-filter: blur(8px);
-    transition: all 0.2s ease;
-    font-family: 'Inter', sans-serif;
-    min-height: 120px;
-  }
-
-  .tile:hover {
-    transform: scale(1.02) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.12);
   }
   
   .tile.note {
     background: #F6E7C1;
-    color: #3C2E1F;
   }
   
   .tile.mint {
     background: #DAF5DC;
-    color: #1F3A29;
   }
   
   .tile.aqua {
     background: #CDEDF6;
-    color: #1C3A47;
   }
   
   .tile.gold {
     background: #E7C873;
-    color: #3C2F1A;
   }
   
   .tile.ink {
