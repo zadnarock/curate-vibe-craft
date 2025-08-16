@@ -21,6 +21,10 @@
   margin: 0 auto;
 }
 
+/* export state classes for CSS Modules */
+.active {}
+.idle {}
+
 /* Initial states (hidden) */
 .copy h2,
 .copy .sub,

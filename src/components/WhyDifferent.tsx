@@ -50,7 +50,7 @@ export function WhyDifferent() {
 
     // Parallax scroll handler
     const handleScroll = () => {
-      if (!section.classList.contains('active')) return;
+      if (!section.classList.contains(styles.active)) return;
       
       const rect = section.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
@@ -72,12 +72,12 @@ export function WhyDifferent() {
     observerRef.current = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          section.classList.add('active');
+          section.classList.add(styles.active);
           
           if (!prefersReducedMotion) {
             // Start idle animation after intro
             setTimeout(() => {
-              section.classList.add('idle');
+              section.classList.add(styles.idle);
             }, 200);
             
             // Add scroll listener for parallax
@@ -85,7 +85,7 @@ export function WhyDifferent() {
             window.addEventListener('scroll', handleScroll, { passive: true });
           }
         } else {
-          section.classList.remove('idle');
+          section.classList.remove(styles.idle);
           
           // Remove scroll listener
           if (scrollHandlerRef.current) {
